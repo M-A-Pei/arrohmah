@@ -112,6 +112,12 @@ export default function Navbar() {
             )}
           </li>
 
+        {
+          Cookies.get("login") ?
+          <li className="cursor-pointer w-full text-center py-2 hover:bg-gray-100"><Link href="/admin">Admin Panel</Link></li>
+          :""
+        }
+
           {
             Cookies.get("login") ?
             <button onClick={() => {Cookies.remove("login"); messageApi.success("Berhasil Logout!"); window.location.reload()}} className="w-50 text-center p-1 outline-1 outline-green-600 hover:bg-green-400 rounded-lg">Logout</button>
