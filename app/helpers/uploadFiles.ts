@@ -1,51 +1,67 @@
-import fs from 'fs';
-import path from 'path';
+import { supabase } from '../api/_db/db';
 import { randomUUID } from 'crypto';
-import { error } from 'console';
+
+// CHANGE THIS to match whatever you named your bucket in the Supabase Dashboard
+const BUCKET_NAME = 'app-storage'; 
 
 /**
- * Decodes a base64 string and saves it to the public folder.
- * Returns the public URL path (e.g., "/folder/image.jpg").
+ * Decodes a base64 string and uploads it to Supabase Storage.
+ * Returns the full Public URL (e.g., "https://xyz.supabase.co/.../folder/image.jpg").
  */
 export const saveBase64Image = async (base64String: string, folderName: string) => {
-    try{
-        // Safety check: if no string provided, return null (or throw error depending on logic)
+    try {
+        // Safety check
         if (!base64String || typeof base64String !== 'string') {
             return null;
         }
-    
+
         // 1. Validate and parse regex
-        // Matches: data:image/png;base64,iVBOR...
         const match = base64String.match(/^data:(.+);base64,(.*)$/);
-        
+
         if (!match) {
             throw new Error(`Invalid image format provided for ${folderName}`);
         }
-    
+
         const mimeType = match[1];      // e.g. "image/png"
         const base64Data = match[2];    // The actual binary data string
-    
-        // 2. Ensure the directory exists
-        const uploadDir = path.join(process.cwd(), "public", folderName);
-        await fs.promises.mkdir(uploadDir, { recursive: true });
-    
-        // 3. Generate Filename
-        // Simple trick: split by '/' to get 'png', 'jpeg', etc.
+
+        // 2. Generate Filename & Path
+        // We do NOT need to run mkdir. Supabase handles virtual folders automatically.
         let extension = mimeType.split("/")[1] || "png";
-        
-        // Optional: standardize jpeg to jpg if you prefer
         if (extension === 'jpeg') extension = 'jpg';
-    
+
         const fileName = `${randomUUID()}.${extension}`;
-        const filePath = path.join(uploadDir, fileName);
-    
-        // 4. Write the file
+        
+        // This creates the "folder" structure inside the bucket
+        const filePath = `${folderName}/${fileName}`; 
+
+        // 3. Convert to Buffer
         const buffer = Buffer.from(base64Data, "base64");
-        await fs.promises.writeFile(filePath, buffer);
-    
-        // 5. Return the relative path for the DB
-        return `/${folderName}/${fileName}`;
-    }catch(e: any){
-        throw e
+
+        // 4. Upload to Supabase
+        const { error: uploadError } = await supabase
+            .storage
+            .from(BUCKET_NAME)
+            .upload(filePath, buffer, {
+                contentType: mimeType,
+                upsert: false
+            });
+
+        if (uploadError) {
+            throw uploadError;
+        }
+
+        // 5. Get Public URL
+        const { data } = supabase
+            .storage
+            .from(BUCKET_NAME)
+            .getPublicUrl(filePath);
+
+        // Returns: https://[project-id].supabase.co/storage/v1/object/public/uploads/folderName/uuid.jpg
+        return data.publicUrl;
+
+    } catch (e: any) {
+        console.error("Upload failed:", e.message);
+        throw e;
     }
 };

@@ -96,8 +96,8 @@ export default function Admin(){
     }, [])
 
     return(
-        <div {...handlers} className="h-screen pt-20 sm:px-3 text-black bg-[url('/img/logo/logo.png')] bg-no-repeat bg-center">
-            <Tabs tabPosition="left" defaultActiveKey="1" items={parentTabItems} destroyInactiveTabPane={true} tabBarStyle={{ display: openSidebar? undefined : "none" }}/>
-        </div>
+      <div {...handlers} className="h-screen pt-20 sm:px-3 pr-5 text-black bg-[url('/img/logo/logo.png')] bg-no-repeat bg-center">
+        <Tabs tabPosition="left" defaultActiveKey="1" items={parentTabItems} destroyInactiveTabPane={true} tabBarStyle={{ display: openSidebar? undefined : "none" }}/>
+      </div>
     )
 }
