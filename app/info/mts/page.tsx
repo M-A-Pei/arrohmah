@@ -152,7 +152,7 @@ export default function infoMts() {
     ];
 
     return (
-    <div className="bg-[url('/img/gedung/gedung_4.jpg')] bg-cover bg-center flex justify-center w-full h-screen relative sm:px-5 px-0">
+    <div className="bg-[url('/img/gedung/gedung_4.jpg')] bg-cover bg-center flex justify-center w-full h-screen relative sm:px-5 px-3">
       {/* Overlay */}
       <div className="absolute inset-0 bg-green-400/50" />
       <div className="absolute opacity-50 inset-0 bg-[url('/img/logo/logo.png')] bg-no-repeat bg-center" />

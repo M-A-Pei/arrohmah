@@ -114,7 +114,7 @@ export default function pendaftaranMts() {
     {
       title: "Cek Ulang",
       content: <div className="p-4 bg-blue-50 rounded-lg outline-2">
-                    <div className="flex gap-3">
+                    <div className="flex sm:flex-row flex-col gap-3">
                         <div className="w-[100px] h-[100px] rounded-xl overflow-hidden">
                             <img
                                 src={fotoMurid || ""}
@@ -123,16 +123,16 @@ export default function pendaftaranMts() {
                             />
                         </div>
                         <div className="flex flex-col gap-1">
+                            <b className="text-blue-500">Kelas {kelas}</b>
                             <div className="flex gap-2">
-                                <b className="w-20">Nama</b><span className="font-normal">: {nama}</span>
+                                <b className="w-17">Nama</b><span className="font-normal">: {nama}</span>
                             </div>
                             <div className="flex gap-2">
-                                <b className="w-20">Telephone</b><span className="font-normal">: {noHp}</span>
+                                <b className="w-17">Telephone</b><span className="font-normal">: {noHp}</span>
                             </div>
                             <div className="flex gap-2">
-                                <b className="w-20">NISN</b><span className="font-normal">: {nisn}</span>
+                                <b className="w-17">NISN</b><span className="font-normal">: {nisn}</span>
                             </div>
-                            <b>Kelas {kelas}</b>
                         </div>
                     </div>
                </div>,
@@ -151,6 +151,7 @@ export default function pendaftaranMts() {
     {
       title: "Pembayaran",
       content:  <div className="flex flex-col gap-4">
+                    <p>Silahkan pilih metode pembayaran: </p>
                     {/* <div className="flex gap-2 items-center bg-blue-100 p-2 rounded-lg h-10">
                         <Image src="/img/logo/bca.png" width={50} height={50} alt="bca logo"/>
                         <b>283193819123129</b>

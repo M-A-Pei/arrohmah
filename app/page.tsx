@@ -77,7 +77,7 @@ useEffect(() => {
       </div>
 
       
-      <h1 data-aos="fade-up" className="w-full text-4xl z-40 font-light font-serif text-center mb-5 sm:mt-10 mt-50">Tentang Kami</h1>
+      <h1 data-aos="fade-up" className="w-full text-4xl z-40 font-light font-serif text-center mb-5 mt-10">Tentang Kami</h1>
 
       {/* gedung section */}
       <div className="my-4">
@@ -160,7 +160,7 @@ useEffect(() => {
               key={i}
               src={src}
               ref={guruImageRef}
-              className="scroll-image h-32 w-auto rounded-lg object-cover"
+              className="scroll-image sm:h-32 h-19 w-auto rounded-lg object-cover"
             />
           ))}
           {images.concat(images).map((src, i) => (
@@ -168,7 +168,7 @@ useEffect(() => {
               key={`${i}2`}
               src={src}
               ref={guruImageRef}
-              className="scroll-image h-32 w-auto rounded-lg object-cover"
+              className="scroll-image sm:h-32 h-19 w-auto rounded-lg object-cover"
             />
             
           ))}
