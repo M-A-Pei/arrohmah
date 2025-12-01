@@ -252,7 +252,7 @@ export default function pendaftaranMa() {
                     )}
                 </div>
             </Modal>
-            <div className="bg-black/80 w-100 h-120 mt-20 rounded-xl flex flex-col gap-3 p-4 z-40 outline-2 bg-[url('/img/logo/logo.png')] bg-no-repeat bg-center">
+            <div className="bg-black/80 w-100 h-120 mt-20 rounded-xl flex flex-col gap-3 mx-3 p-4 z-40 outline-2 bg-[url('/img/logo/logo.png')] bg-no-repeat bg-center">
                 <h2 className="text-4xl text-white text-center w-full">Pendaftaran MA</h2>
                 <input type="text" value={nama} onChange={e => setNama(e.target.value)} placeholder="Nama" className="rounded bg-white text-gray-500 px-2 opacity-75"/>
                 <input type="text" value={noHp} onChange={e => setNoHp(e.target.value)} placeholder="Nomor Handphone" className="rounded bg-white text-gray-500 px-2 opacity-75"/>
