@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation"
 import { Tabs } from "antd";
@@ -12,11 +12,19 @@ import UtsTab from "@/components/tabs/utsTab";
 import UasTab from "@/components/tabs/uasTab";
 import AdminMaTab from "@/components/tabs/adminMaTab";
 import SppTab from "@/components/tabs/sppTab";
+import { useSwipeable } from 'react-swipeable';
 
 export default function Admin(){
     const router = useRouter()
-
     const login = Cookies.get("login");
+
+    const [openSidebar, setOpenSidebar] = useState(true)
+    
+    const handlers = useSwipeable({
+      onSwipedLeft: () => setOpenSidebar(false),
+      onSwipedRight: () => {console.log("OPEN"); setOpenSidebar(true)},
+      trackMouse: true // allows you to test swipe with mouse on desktop
+    });
 
     const muridBaruTabItems = [
       {
@@ -88,8 +96,8 @@ export default function Admin(){
     }, [])
 
     return(
-        <div className="h-screen pt-20 sm:px-3 text-black bg-[url('/img/logo/logo.png')] bg-no-repeat bg-center">
-            <Tabs tabPosition="left" defaultActiveKey="1" items={parentTabItems} destroyInactiveTabPane={true}/>
+        <div {...handlers} className="h-screen pt-20 sm:px-3 text-black bg-[url('/img/logo/logo.png')] bg-no-repeat bg-center">
+            <Tabs tabPosition="left" defaultActiveKey="1" items={parentTabItems} destroyInactiveTabPane={true} tabBarStyle={{ display: openSidebar? undefined : "none" }}/>
         </div>
     )
 }
