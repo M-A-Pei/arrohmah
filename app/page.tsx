@@ -145,6 +145,13 @@ useEffect(() => {
           </div>
         </div>
       </div>
+
+      <h1 className="w-full text-4xl z-40 font-light font-serif text-center mb-5 mt-10">Kunjungi di</h1>
+
+      {/* map section */}
+      <div className="my-4 flex justify-center">
+        <iframe className="w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d562.6412627453974!2d106.42087771932037!3d-6.2656864395388485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e420536c0268ceb%3A0x4718029ff685646!2sMA%20ARROHMAH%20CISOKA!5e1!3m2!1sid!2sid!4v1764041757373!5m2!1sid!2sid" style={{"border" : 0}} allowFullScreen={false} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+      </div>
       
       <h1 data-aos="fade-up" className="w-full text-4xl z-40 font-light font-serif text-center mb-5 mt-10" data-aos-offset="-200">Guru Guru Kami</h1>
 
